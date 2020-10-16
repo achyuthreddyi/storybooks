@@ -29,8 +29,14 @@ if(process.env.NODE_ENV === 'development'){
 app.engine('.hbs', exphbs({defaultLayout: 'main',extname: '.hbs'}))
 app.set('view engine', '.hbs')
 
-//Passport  middlewares
+//Sessiond middleware
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+}))
 
+//Passport  middlewares
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -39,6 +45,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 //Routes
 app.use('/', require('./routes/index'))
+//auth routes 
+app.use('/auth', require('./routes/auth'))
 
 const PORT = process.env.PORT || 5000
 
