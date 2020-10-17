@@ -20,5 +20,4 @@ router.get('/signout', (req, res) =>{
     res.redirect('/')
 })
 
-
 module.exports = router
