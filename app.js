@@ -31,8 +31,11 @@ if(process.env.NODE_ENV === 'development'){
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
+//handlebars helpers
+const { formatDate } = require('./helpers/hbs')
+
 //Handle Bars
-app.engine('.hbs', exphbs({defaultLayout: 'main',extname: '.hbs'}))
+app.engine('.hbs', exphbs({helpers: {formatDate}, defaultLayout: 'main',extname: '.hbs'}))
 app.set('view engine', '.hbs')
 
 //Sessiond middleware
